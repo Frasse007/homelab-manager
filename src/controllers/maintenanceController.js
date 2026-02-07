@@ -91,8 +91,13 @@ async function createMaintenanceLog(req, res, next) {
         // Creates new maintenance log with input from user
         const log = await MaintenanceLog.create(logData);
 
+        // Fetches full data including associations to return to user
+        const fullLog = await MaintenanceLog.findByPk(log.id, {
+            include: [{ model: Service, as: 'service' }]
+        });
+
         // Returns success message with log information
-        successResponse(res, log, 'Maintenance log created successfully', 201);
+        successResponse(res, fullLog, 'Maintenance log created successfully', 201);
     } catch (error) {
         next(error);
     }
