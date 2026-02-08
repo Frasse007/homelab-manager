@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 
+// Validation logic for creating services
 const createServiceValidator = [
     body('service_name')
         .trim()
@@ -76,6 +77,7 @@ const createServiceValidator = [
         .withMessage('Security score must be between 0 and 100')
 ];
 
+// Validation logic for updating services
 const updateServiceValidator = [
     body('service_name')
         .optional()
