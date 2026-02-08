@@ -82,13 +82,11 @@ const updateServiceValidator = [
     body('service_name')
         .optional()
         .trim()
-        .withMessage('Service name is required')
         .isLength({ max: 100 })
         .withMessage('Service name must not exceed 100 characters'),
 
     body('service_type')
         .optional()
-        .withMessage('Service type is required')
         .isIn(['web', 'database', 'storage', 'monitoring', 'networking', 'other'])
         .withMessage('Invalid service type'),
 
