@@ -1,0 +1,116 @@
+'use strict';
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('services', [
+      {
+        user_id: 1,
+        service_name: 'Nextcloud',
+        service_type: 'storage',
+        description: 'Self-hosted cloud storage and file sharing',
+        url: 'https://cloud.homelab.local',
+        port: 443,
+        internal_ip: '192.168.1.100',
+        docker_container_name: 'nextcloud',
+        docker_image: 'nextcloud:latest',
+        cpu_allocated: 2.0,
+        ram_allocated: 2048,
+        status: 'running',
+        uptime_percentage: 99.8,
+        last_health_check: new Date(),
+        public_facing: true,
+        authentication_method: 'LDAP',
+        security_score: 85,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        user_id: 1,
+        service_name: 'Plex Media Server',
+        service_type: 'web',
+        description: 'Media streaming server',
+        url: 'https://plex.homelab.local',
+        port: 32400,
+        internal_ip: '192.168.1.101',
+        docker_container_name: 'plex',
+        docker_image: 'plexinc/pms-docker:latest',
+        cpu_allocated: 4.0,
+        ram_allocated: 4096,
+        status: 'running',
+        uptime_percentage: 99.9,
+        last_health_check: new Date(),
+        public_facing: true,
+        authentication_method: 'Plex Account',
+        security_score: 90,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        user_id: 2,
+        service_name: 'PostgreSQL Database',
+        service_type: 'database',
+        description: 'Primary PostgreSQL database server',
+        port: 5432,
+        internal_ip: '192.168.1.102',
+        docker_container_name: 'postgres',
+        docker_image: 'postgres:15',
+        cpu_allocated: 2.0,
+        ram_allocated: 4096,
+        status: 'running',
+        uptime_percentage: 99.95,
+        last_health_check: new Date(),
+        public_facing: false,
+        authentication_method: 'Password',
+        security_score: 88,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        user_id: 2,
+        service_name: 'Grafana',
+        service_type: 'monitoring',
+        description: 'Monitoring and visualization dashboard',
+        url: 'https://grafana.homelab.local',
+        port: 3000,
+        internal_ip: '192.168.1.103',
+        docker_container_name: 'grafana',
+        docker_image: 'grafana/grafana:latest',
+        cpu_allocated: 1.0,
+        ram_allocated: 1024,
+        status: 'running',
+        uptime_percentage: 99.5,
+        last_health_check: new Date(),
+        public_facing: false,
+        authentication_method: 'OAuth2',
+        security_score: 92,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        user_id: 1,
+        service_name: 'Pi-hole',
+        service_type: 'networking',
+        description: 'Network-wide ad blocking',
+        url: 'http://pihole.homelab.local',
+        port: 80,
+        internal_ip: '192.168.1.104',
+        docker_container_name: 'pihole',
+        docker_image: 'pihole/pihole:latest',
+        cpu_allocated: 0.5,
+        ram_allocated: 512,
+        status: 'running',
+        uptime_percentage: 99.99,
+        last_health_check: new Date(),
+        public_facing: false,
+        authentication_method: 'Password',
+        security_score: 85,
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+    ]);
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('services', null, {});
+  }
+};
