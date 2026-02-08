@@ -34,6 +34,7 @@ const registerValidator = [
         .withMessage('Last name must not exceed 50 characters'),
 
     body('role')
+        .optional()
         .isIn(['user', 'admin'])
         .withMessage('Role must be user or admin')
 ];
