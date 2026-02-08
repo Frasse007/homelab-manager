@@ -5,6 +5,7 @@ const { errorResponse } = require('../utils/responseFormatter.js');
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
+    skip: (req, res) => process.env.NODE_ENV === 'test',
     message: 'Too many requests from this IP, please try again later',
     standardHeaders: true,
     legacyHeaders: false,
@@ -17,6 +18,7 @@ const apiLimiter = rateLimit({
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 5,
+    skip: (req, res) => process.env.NODE_ENV === 'test',
     message: 'Too many authentication attempts, please try again later',
     standardHeaders: true,
     legacyHeaders: false,
