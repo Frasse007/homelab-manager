@@ -29,10 +29,12 @@ async function authenticate(req, res, next) {
         req.user = user;
         next();
     } catch (error) {
-        if (error.message === 'Invalid or expired token') {
-            return next(new AuthenticationError(error.message));
+        // If the error is already an 'AuthenticationError' pass it on
+        if (error instanceof AuthenticationError) {
+            return next(error);
         }
-        next(error);
+        // Catch any JWT verification errors and turn them into  custom 'AuthenticationError' 401s
+        return next(new AuthenticationError('Invalid or expired token', 401));
     }
 };
 
