@@ -9,7 +9,7 @@ const { AuthenticationError, ConflictError } = require('../utils/errors.js');
 async function register(req, res, next) {
     try {
         const { username, email, password, first_name, last_name, role } = req.body;
-
+        let finalRole = 'user'
         // Checks if user already exists
         const existingUser = await User.findOne({
             where: {
@@ -22,6 +22,16 @@ async function register(req, res, next) {
             throw new ConflictError('Username or email already exists');
         }
 
+        // Only allows superuser to create 'admin' role
+        if (req.body.role === 'admin') {
+            const isSuperuser = req.user?.role === 'superuser';
+            if (isSuperuser) {
+                finalRole = 'admin';
+            } else {
+                finalRole = 'user';
+            };
+        }
+
         // Hashes password before creating user
         const password_hash = await hashPassword(password);
 
@@ -32,7 +42,7 @@ async function register(req, res, next) {
             password_hash,
             first_name,
             last_name,
-            role: role || 'user'
+            role: finalRole
         });
 
         // Generates token for user
