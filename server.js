@@ -21,7 +21,7 @@ async function startServer() {
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
             console.log(`Environment: ${config.nodeEnv}`);
-            console.log(`API available at http://localhost:${PORT}/api`);
+            console.log(`API available at http://localhost:${PORT}/`);
         });
     } catch (error) {
         console.error('Unable to start server:', error);
