@@ -1,5 +1,5 @@
 'use strict';
-const { roles } = require('../src/config/auth');
+const { roles } = require('../../src/config/auth');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
