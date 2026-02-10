@@ -37,12 +37,12 @@ module.exports = {
         updated_at: new Date()
       },
       {
-        username: 'superuser',
-        email: 'superuser@homelab.local',
+        username: 'testGuy',
+        email: 'testGuy@homelab.local',
         password_hash: hashedPassword,
-        role: 'superuser',
-        first_name: 'Super',
-        last_name: 'User',
+        role: 'user',
+        first_name: 'Test',
+        last_name: 'Guy',
         notification_preferences: JSON.stringify({
           email: true,
           ssl_expiry: true,
