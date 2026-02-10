@@ -60,7 +60,8 @@ The API will be available at `http://localhost:3000`
 
 ## Documentation
 
-[**API Endpoint Documentation**](docs/API.md)
+- [**API Endpoint Documentation**](docs/API.md)
+- [**POSTMAN Documentation**](https://documenter.getpostman.com/view/51755130/2sBXcAJhzM)
 
 ## Running Tests
 This project uses Jest and Supertest for testing.
