@@ -37,9 +37,18 @@ const createSSLCertificateValidator = [
     .custom((value, { req }) => {
       const issueDate = new Date(req.body.issue_date);
       const expirationDate = new Date(value);
+      const today = new Date();
+
+      // Check that expirationDate is later than issueDate
       if (expirationDate <= issueDate) {
         throw new Error('Expiration date must be after issue date');
       }
+
+      // Check expirationDate is in the future
+      if (expirationDate <= today) {
+        throw new Error('The certificate has already expired');
+      }
+
       return true;
     }),
   
@@ -87,10 +96,17 @@ const updateSSLCertificateValidator = [
     .isISO8601()
     .withMessage('Please provide a valid expiration date')
     .custom((value, { req }) => {
+        const expirationDate = new Date(value);
+        const today = new Date();
+
+        // Check expirationDate is in the future
+        if (expirationDate <= today) {
+          throw new Error('The certificate has already expired');
+        }
+
         // Only perform check if expiration date is after issuance date if request body includes both
         if (req.body.issue_date && value) {
             const issueDate = new Date(req.body.issue_date);
-            const expirationDate = new Date(value);
             if (expirationDate <= issueDate) {
             throw new Error('Expiration date must be after issue date');
             }
