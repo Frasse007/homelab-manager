@@ -73,6 +73,21 @@ POST /api/auth/login
 }
 ```
 
+#### Logout
+```http
+POST /api/auth/logout
+Authorization: Bearer <token>
+```
+
+**Response:** `200 OK`
+
+```json
+{
+  "success": true,
+  "message": "Logout successful"
+}
+```
+
 #### Get current user profile
 ```http
 GET /api/auth/me
