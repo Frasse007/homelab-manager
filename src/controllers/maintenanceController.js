@@ -72,11 +72,6 @@ async function getMaintenanceLogById(req, res, next) {
 // POST /api/maintenance-logs - Creates new maintenance log
 async function createMaintenanceLog(req, res, next) {
     try {
-        // Takes input from user
-        const logData = {
-            ...req.body,
-            performed_by_user_id: req.user.id
-        };
 
         // Throws custom errors if service doesn't exist or user doesn't own service with that ID
         const service = await Service.findByPk(req.body.service_id);
@@ -87,6 +82,12 @@ async function createMaintenanceLog(req, res, next) {
         if (req.user.role !== 'admin' && service.user_id !== req.user.id) {
             throw new AuthorizationError('You cannot create logs for services you do not own');
         }
+
+        // Takes input from user
+        const logData = {
+            ...req.body,
+            performed_by_user_id: req.user.id
+        };
 
         // Creates new maintenance log with input from user
         const log = await MaintenanceLog.create(logData);
