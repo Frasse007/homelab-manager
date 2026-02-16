@@ -67,7 +67,8 @@ module.exports = (sequelize) => {
         // Resources information about service
         cores_allocated: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            validate: { min: 1 }
         },
         ram_allocated: {
             type: DataTypes.INTEGER,
@@ -113,7 +114,13 @@ module.exports = (sequelize) => {
         // Table settings/rules
         tableName: 'services',
         timestamps: true,
-        underscored: true
+        underscored: true,
+        indexes: [
+            {
+                unique: true,
+                fields: ['service_name', 'user_id']
+            }
+        ]
     });
 
     return Service;

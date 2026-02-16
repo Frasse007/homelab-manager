@@ -82,6 +82,14 @@ async function createService(req, res, next) {
         // Returns success message with service information
         successResponse(res, service, 'Service created successfully', 201);
     } catch (error) {
+        // Checks if any unique constraints fail
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(400).json({
+                success: false,
+                message: 'A service with this name already exists',
+                errors: error.errors.map(e => ({ field: e.path, message: e.message }))
+            });
+        }
         next(error);
     }
 };
@@ -110,6 +118,13 @@ async function updateService(req, res, next) {
         // Returns success message with service information
         successResponse(res, service, 'Service updated successfully');
     } catch (error) {
+        // Checks if any unique constraints fail
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(400).json({
+                success: false,
+                message: 'Update failed: That service name is already taken',
+            });
+        }
         next(error);
     }
 };

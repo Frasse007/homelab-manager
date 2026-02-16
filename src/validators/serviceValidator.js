@@ -5,6 +5,7 @@ const createServiceValidator = [
     body('service_name')
         .trim()
         .notEmpty()
+        .isLength({ min: 1 })
         .withMessage('Service name is required')
         .isLength({ max: 100 })
         .withMessage('Service name must not exceed 100 characters'),
@@ -44,7 +45,7 @@ const createServiceValidator = [
 
     body('cores_allocated')
         .optional()
-        .isFloat({ min: 0, max: 100 })
+        .isInt({ min: 0, max: 100 })
         .withMessage('CPU cores allocated must be between 0 and 100'),
 
     body('ram_allocated')

@@ -51,8 +51,8 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: true
       },
-      cpu_allocated: {
-        type: Sequelize.DECIMAL(5, 2),
+      cores_allocated: {
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       ram_allocated: {
@@ -97,7 +97,10 @@ module.exports = {
     });
 
     // Adds indexes for most common queries
-    await queryInterface.addIndex('services', ['user_id']);
+    await queryInterface.addIndex('services', ['service_name', 'user_id'], {
+      unique: true,
+      name: 'unique_service_name_per_user'
+    });
     await queryInterface.addIndex('services', ['service_type']);
     await queryInterface.addIndex('services', ['status']);
     await queryInterface.addIndex('services', ['public_facing']);
