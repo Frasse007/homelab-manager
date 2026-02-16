@@ -24,12 +24,14 @@ const registerValidator = [
     body('first_name')
         .optional()
         .trim()
+        .escape()
         .isLength({ max: 50 })
         .withMessage('First name must not exceed 50 characters'),
 
     body('last_name')
         .optional()
         .trim()
+        .escape()
         .isLength({ max: 50 })
         .withMessage('Last name must not exceed 50 characters'),
 

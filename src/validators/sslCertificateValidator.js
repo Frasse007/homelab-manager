@@ -8,6 +8,7 @@ const createSSLCertificateValidator = [
   
   body('domain')
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Domain is required')
     .isLength({ max: 255 })
@@ -15,6 +16,7 @@ const createSSLCertificateValidator = [
   
   body('issuer')
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Issuer is required')
     .isLength({ max: 255 })
@@ -68,6 +70,7 @@ const updateSSLCertificateValidator = [
   body('domain')
     .optional()
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Domain cannot be empty')
     .isLength({ max: 255 })
@@ -76,6 +79,7 @@ const updateSSLCertificateValidator = [
   body('issuer')
     .optional()
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Issuer cannot be empty')
     .isLength({ max: 255 })

@@ -19,6 +19,7 @@ const createMaintenanceLogValidator = [
   
   body('title')
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Title is required')
     .isLength({ max: 200 })
@@ -26,6 +27,7 @@ const createMaintenanceLogValidator = [
   
   body('description')
     .trim()
+    .escape()
     .notEmpty()
     .withMessage('Description is required'),
   
@@ -36,11 +38,13 @@ const createMaintenanceLogValidator = [
   
   body('version_before')
     .optional()
-    .trim(),
+    .trim()
+    .escape(),
   
   body('version_after')
     .optional()
-    .trim(),
+    .trim()
+    .escape(),
   
   body('success')
     .optional()
@@ -50,6 +54,7 @@ const createMaintenanceLogValidator = [
   body('notes')
     .optional()
     .trim()
+    .escape()
 ];
 
 module.exports = {
