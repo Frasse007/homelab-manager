@@ -6,6 +6,7 @@ module.exports = {
     bcryptRounds: 10,
     roles: {
         USER: 'user',
-        ADMIN: 'admin'
+        ADMIN: 'admin',
+        SUPERUSER: 'superuser'
     }
 };
