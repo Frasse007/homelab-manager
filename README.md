@@ -66,7 +66,6 @@ The API will be available at `http://localhost:3000`
 ## Running Tests
 This project uses Jest and Supertest for testing.
 - **Run all tests:** `npm test`
-- **Watch mode:** `npm run test:watch`
 
 ## Technology Stack
 - **Runtime**: Node.js 18+
