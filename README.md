@@ -66,6 +66,7 @@ The API will be available at `http://localhost:3000`
 
 ## Running Tests
 This project uses Jest and Supertest for testing.
+- **Setup test database:** `npm run db:setup:test`
 - **Run all tests:** `npm test`
 
 ## Technology Stack
