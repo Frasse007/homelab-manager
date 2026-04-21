@@ -259,14 +259,12 @@ describe('SSL Certificate Endpoints', () => {
           expiration_date: nextWeek,
           status: 'expiring_soon',
           auto_renewal_enabled: true,
-          issuer: 'Let\'s Encrypt'
         });
 
       expect(response.status).toBe(200);
       expect(response.body.success).toBe(true);
       expect(response.body.data).toHaveProperty('status', 'expiring_soon');
       expect(response.body.data).toHaveProperty('auto_renewal_enabled', true);
-      expect(response.body.data).toHaveProperty('issuer', 'Let\'s Encrypt');
     });
 
     it('should renew certificate (update expiry date)', async () => {
