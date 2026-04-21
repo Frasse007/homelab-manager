@@ -14,7 +14,7 @@ function verifyToken(token) {
         return jwt.verify(token, jwtSecret);
     } catch (error) {
         // Checks if token is expired otherwise throws invalid token error
-        if (error === 'TokenExpiredError') {
+        if (error.name === 'TokenExpiredError') {
             throw new Error('Token has expired');
         }
         throw new Error('Invalid token');
